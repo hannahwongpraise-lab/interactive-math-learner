@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Learn mathematics by playing with it: interactive animations for trigonometry, quadratics and the Pythagorean theorem." />
+    <title>MathPlay — Interactive Math Learning</title>
+  </head>
+  <body>
+    <header class="nav">
+      <a class="brand" href="#top" aria-label="MathPlay home">
+        <span class="brand-mark">▲</span> Math<span>Play</span>
+      </a>
+      <nav>
+        <a href="#unit-circle">Trigonometry</a>
+        <a href="#quadratic">Quadratics</a>
+        <a href="#pythagoras">Pythagoras</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-text">
+          <p class="eyebrow">Interactive mathematics</p>
+          <h1>Don't just read math.<br /><span class="hl">Play with it.</span></h1>
+          <p class="lead">
+            Drag, slide and animate your way through big ideas. Every picture below is live —
+            change a number and watch the math respond instantly.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#unit-circle">Start exploring</a>
+            <a class="btn btn-ghost" href="#how">How it works</a>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <canvas id="hero-canvas"></canvas>
+        </div>
+      </section>
+
+      <section id="how" class="how">
+        <div class="how-item"><span class="num">01</span><h3>See it</h3><p>Each concept starts with a moving picture, not a formula.</p></div>
+        <div class="how-item"><span class="num">02</span><h3>Change it</h3><p>Drag the yellow handles or move the sliders to test your own ideas.</p></div>
+        <div class="how-item"><span class="num">03</span><h3>Explain it</h3><p>Live readouts connect what you see to the equations behind it.</p></div>
+      </section>
+
+      <!-- Demo 1: Unit circle -->
+      <section id="unit-circle" class="demo">
+        <div class="demo-head">
+          <span class="tag">Lab 01 · Trigonometry</span>
+          <h2>The Unit Circle &amp; Sine Waves</h2>
+          <p>
+            A point travels around a circle of radius 1. Its <b class="c-sin">height</b> is
+            <code>sin θ</code> and its <b class="c-cos">horizontal position</b> is <code>cos θ</code>.
+            Unroll the motion over time and you get a wave.
+          </p>
+        </div>
+        <div class="demo-body">
+          <div class="stage stage-split">
+            <canvas id="uc-circle" aria-label="Unit circle. Drag the point to change the angle."></canvas>
+            <canvas id="uc-wave" aria-label="Sine and cosine graphs"></canvas>
+          </div>
+          <aside class="panel">
+            <div class="controls">
+              <button class="btn btn-primary btn-sm" id="uc-play">Pause</button>
+              <label>Angle θ <output id="uc-angle-out">0°</output>
+                <input type="range" id="uc-angle" min="0" max="360" step="1" value="0" />
+              </label>
+              <label>Speed <output id="uc-speed-out">1×</output>
+                <input type="range" id="uc-speed" min="0.25" max="3" step="0.25" value="1" />
+              </label>
+              <div class="toggles">
+                <label class="chk"><input type="checkbox" id="uc-sin" checked /> <span class="c-sin">sin θ</span></label>
+                <label class="chk"><input type="checkbox" id="uc-cos" checked /> <span class="c-cos">cos θ</span></label>
+              </div>
+            </div>
+            <dl class="readout">
+              <div><dt>θ (radians)</dt><dd id="uc-rad">0.000</dd></div>
+              <div><dt class="c-sin">sin θ</dt><dd id="uc-sinv">0.000</dd></div>
+              <div><dt class="c-cos">cos θ</dt><dd id="uc-cosv">1.000</dd></div>
+              <div><dt>sin²θ + cos²θ</dt><dd id="uc-id">1.000</dd></div>
+            </dl>
+            <p class="tip"><b>Try it:</b> drag the yellow point. At what angles is sin θ = cos θ?</p>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Demo 2: Quadratic -->
+      <section id="quadratic" class="demo">
+        <div class="demo-head">
+          <span class="tag">Lab 02 · Algebra</span>
+          <h2>Shape-Shifting Parabolas</h2>
+          <p>
+            In vertex form <code>y = a(x − h)² + k</code>, each letter has a job:
+            <b>a</b> stretches and flips, <b>h</b> slides left–right and <b>k</b> slides up–down.
+            Watch where the parabola crosses the x-axis — those are its roots.
+          </p>
+        </div>
+        <div class="demo-body">
+          <div class="stage">
+            <canvas id="quad-canvas" aria-label="Parabola graph. Drag the vertex to move it."></canvas>
+          </div>
+          <aside class="panel">
+            <div class="equation" id="quad-eq">y = 1(x − 0)² + 0</div>
+            <div class="controls">
+              <label>a <output id="quad-a-out">1.0</output>
+                <input type="range" id="quad-a" min="-3" max="3" step="0.1" value="1" />
+              </label>
+              <label>h <output id="quad-h-out">0.0</output>
+                <input type="range" id="quad-h" min="-6" max="6" step="0.1" value="0" />
+              </label>
+              <label>k <output id="quad-k-out">0.0</output>
+                <input type="range" id="quad-k" min="-6" max="6" step="0.1" value="0" />
+              </label>
+              <div class="btn-row">
+                <button class="btn btn-primary btn-sm" id="quad-animate">Animate</button>
+                <button class="btn btn-ghost btn-sm" id="quad-reset">Reset</button>
+              </div>
+            </div>
+            <dl class="readout">
+              <div><dt>Standard form</dt><dd id="quad-std">x²</dd></div>
+              <div><dt>Vertex</dt><dd id="quad-vertex">(0, 0)</dd></div>
+              <div><dt>Discriminant</dt><dd id="quad-disc">0</dd></div>
+              <div><dt>Roots</dt><dd id="quad-roots">x = 0</dd></div>
+            </dl>
+            <p class="tip"><b>Try it:</b> drag the vertex above the x-axis with a &gt; 0. What happens to the roots?</p>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Demo 3: Pythagoras -->
+      <section id="pythagoras" class="demo">
+        <div class="demo-head">
+          <span class="tag">Lab 03 · Geometry</span>
+          <h2>Seeing the Pythagorean Theorem</h2>
+          <p>
+            For any right triangle, the square on the longest side has exactly the same area as the
+            other two squares combined: <code>a² + b² = c²</code>. In the second picture, four copies of the
+            triangle slide around inside a big square to <em>prove</em> it — no algebra needed.
+          </p>
+        </div>
+        <div class="demo-body">
+          <div class="stage stage-split">
+            <canvas id="py-squares" aria-label="Right triangle with squares on each side. Drag the corners."></canvas>
+            <canvas id="py-proof" aria-label="Rearrangement proof animation"></canvas>
+          </div>
+          <aside class="panel">
+            <div class="controls">
+              <label>Leg a <output id="py-a-out">3.0</output>
+                <input type="range" id="py-a" min="1" max="12" step="0.1" value="3" />
+              </label>
+              <label>Leg b <output id="py-b-out">4.0</output>
+                <input type="range" id="py-b" min="1" max="12" step="0.1" value="4" />
+              </label>
+              <label>Proof step <output id="py-t-out">0%</output>
+                <input type="range" id="py-t" min="0" max="1" step="0.01" value="0" />
+              </label>
+              <div class="btn-row">
+                <button class="btn btn-primary btn-sm" id="py-play">Play proof</button>
+                <button class="btn btn-ghost btn-sm" data-triple="3,4">3‑4‑5</button>
+                <button class="btn btn-ghost btn-sm" data-triple="5,12">5‑12‑13</button>
+                <button class="btn btn-ghost btn-sm" data-triple="6,8">6‑8‑10</button>
+              </div>
+            </div>
+            <dl class="readout">
+              <div><dt>a²</dt><dd id="py-a2">9.00</dd></div>
+              <div><dt>b²</dt><dd id="py-b2">16.00</dd></div>
+              <div><dt>a² + b²</dt><dd id="py-sum">25.00</dd></div>
+              <div><dt>c² (c = <span id="py-c">5.00</span>)</dt><dd id="py-c2">25.00</dd></div>
+            </dl>
+            <p class="tip"><b>Why it works:</b> the big square and the four triangles never change, so the leftover yellow area must stay the same — c² in one arrangement, a² + b² in the other.</p>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p><span class="brand-mark">▲</span> MathPlay — built for curious minds. Drag everything.</p>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
